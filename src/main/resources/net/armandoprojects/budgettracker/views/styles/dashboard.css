@@ -1,0 +1,16 @@
+.add-btn {
+	-fx-font-size: 24;
+	-fx-font-weight: bold;
+}
+
+.context-menu {
+	-fx-background: #000000;
+}
+
+button {
+	-fx-font-weight: bold;
+}
+
+.testing123 {
+	-fx-font-size: 40;
+}
