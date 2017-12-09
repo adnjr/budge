@@ -7,8 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import net.armandoprojects.budgettracker.models.Armando;
-import net.armandoprojects.budgettracker.models.Jerry;
+import net.armandoprojects.budgettracker.interfaces.Transaction;
 import net.armandoprojects.budgettracker.services.model.TransactionService;
 import net.armandoprojects.budgettracker.services.ui.SceneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +55,20 @@ public class AddExpenseController implements Initializable {
 		if (dateField.getValue() == null || totalField.getText().trim().isEmpty())
 			return;
 
-		transactionService.addExpense(dateField.getValue(), totalField.getText(), new Jerry(), new Armando());
+		transactionService.addExpense(dateField.getValue(), totalField.getText()/*, new Jerry(), new Armando()*/);
 	}
 
 	@FXML
 	private void cancelExpense() {
-		System.out.println("Expense cancelled.");
+		Transaction expense = transactionService.getExpense();
+
+		System.out.println("AddExpenseController checking result...");
+		System.out.println("transaction 0:");
+		System.out.println("\ttype: " + expense.getType());
+		System.out.println("\tdate: " + expense.getTransactionDate());
+		System.out.println("\ttotal: " + expense.getTotal());
+		System.out.println();
+
 		goHome();
 	}
 

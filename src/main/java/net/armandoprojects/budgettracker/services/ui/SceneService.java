@@ -16,7 +16,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-/** @author The Man */
+/** Provides common services involved in the swapping out of scenes.
+ * @author The Man */
 @Service
 @Lazy
 public class SceneService {
@@ -34,6 +35,8 @@ public class SceneService {
 //	private final Stage mainStage;
 	public SceneService() {
 //		this.mainStage = (Stage) context.getBean("mainStage");
+
+		// map each scene's enum to its fxml/css locations and title
 		scenes.put(Scenes.DASHBOARD, new SceneMetadata(
 			"/net/armandoprojects/budgettracker/views/Dashboard.fxml",
 			"/net/armandoprojects/budgettracker/views/styles/dashboard.css",
@@ -46,19 +49,22 @@ public class SceneService {
 		));
 	}
 
+	/** Load the specified scene onto the give node's stage.
+	 * @param sceneEnum Enum indicating which scene to load.
+	 * @param node The stage this node is on will be used.
+	 * @return The stage argument for convenience. e.g. chaining w/.show() */
 	public Stage load(Scenes sceneEnum, Node node) {
 		Stage stage = (Stage) node.getScene().getWindow();
 		return this.load(sceneEnum, stage);
 	}
 
-	/** Load the specified scene onto the specified stage
+	/** Load the specified scene onto the given stage
 	 * @param sceneEnum Enum indicating which scene to load.
 	 * @param stage The stage to set the scene onto.
-	 * @return The stage argument for convenience. e.g. chaining w/ .show() */
+	 * @return The stage argument for convenience. e.g. chaining w/.show() */
 	public Stage load(Scenes sceneEnum, Stage stage) {
 		SceneMetadata sceneData = scenes.get(sceneEnum);
-		String fxmlLocation = sceneData.getFxmlLocation();
-		Scene scene = this.load(fxmlLocation);
+		Scene scene = this.load(sceneData.getFxmlLocation());
 		scene.getStylesheets().add(sceneData.getCssLocation());
 //		Stage mainStage = (Stage)context.getBean("mainStage");
 		stage.setTitle(sceneData.getTitle());
@@ -67,7 +73,8 @@ public class SceneService {
 		return stage;
 	}
 
-	public Scene load(String fxmlLocation) {
+	/** @return A new scene using the given FXML resource location. */
+	private Scene load(String fxmlLocation) {
 		Scene scene;
 
 		try (InputStream fxmlStream = getClass().getResourceAsStream(fxmlLocation)) {

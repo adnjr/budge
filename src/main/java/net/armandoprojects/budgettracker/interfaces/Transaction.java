@@ -6,14 +6,13 @@ import net.armandoprojects.budgettracker.models.TransactionType;
 /** @author The Man */
 public interface Transaction {
 
-	public Person getInitiator();
+	/*public Person getInitiator();
 
 	public void setInitiator(Person person);
 
 	public Person getTarget();
 
-	public void setTarget(Person person);
-
+	public void setTarget(Person person);*/
 	public Long getTotal();
 
 	public void setTotal(Long total);
@@ -22,8 +21,8 @@ public interface Transaction {
 
 	public void setType(TransactionType type);
 
-	public LocalDate getTimestamp();
+	public LocalDate getTransactionDate();
 
-	public void setTimestamp(LocalDate timestamp);
+	public void setTransactionDate(LocalDate transactionDate);
 
 }

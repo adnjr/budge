@@ -1,6 +1,5 @@
 package net.armandoprojects.budgettracker;
 
-import net.armandoprojects.budgettracker.models.SingularTransaction;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
@@ -10,26 +9,25 @@ import spring.BudgetConfig;
 
 public class MainApp extends Application {
 
-//	private static final String DASHBOARD_TITLE = "JavaFX / Maven / Spring";
-//	private static final String DASHBOARD_FXML = "/net/armandoprojects/spring/javafx/maven/gui/Dashboard.fxml";
-//	private static final String DASHBOARD_CSS = "/net/armandoprojects/spring/javafx/maven/gui/styles/dashboard.css";
 	@Override
 	public void start(Stage stage) throws Exception {
-//		DefaultListableBeanFactory parentBeanFactory;
 		AnnotationConfigApplicationContext context;
+//		DefaultListableBeanFactory parentBeanFactory;
 //		GenericApplicationContext parentContext;
 
-		// create spring application context and register stage
+		// create Spring application context
+		context = new AnnotationConfigApplicationContext(BudgetConfig.class);
+
+//		// create spring application context and register stage
 //		parentBeanFactory = new DefaultListableBeanFactory();
 //		parentBeanFactory.registerResolvableDependency(Stage.class, stage);
 //		parentContext = new GenericApplicationContext(parentBeanFactory);
 //		parentContext.refresh();
-		context = new AnnotationConfigApplicationContext(BudgetConfig.class);
+//		// register the main stage as a singleton w/Spring's application context
 //		context.register(BudgetConfig.class);
 //		context.getBeanFactory().registerSingleton("mainStage", stage);
 //		context.getBeanFactory().registerResolvableDependency(Stage.class, stage);
 //		context.refresh();
-
 		this.showGUI(stage, context);
 	}
 
@@ -37,15 +35,13 @@ public class MainApp extends Application {
 		launch(args);
 	}
 
+	/** Use services obtained from the given context to set and show the stage. */
 	private void showGUI(Stage stage, AnnotationConfigApplicationContext context) throws Exception {
+		// retrieve SceneService bean from Spring's application context
 		SceneService scene = context.getBean(SceneService.class);
 
-		// create a scene from dasbhoard fxml and show the stage
+		// create and load the dashboard scene onto the stage
 		scene.load(SceneService.Scenes.DASHBOARD, stage).show();
-	}
-
-	private void testSpring(SingularTransaction expense) {
-		System.out.println(expense.toString());
 	}
 
 }
