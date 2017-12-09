@@ -4,7 +4,7 @@ import net.armandoprojects.budgettracker.models.SingularTransaction;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
-import net.armandoprojects.budgettracker.services.SceneService;
+import net.armandoprojects.budgettracker.services.ui.SceneService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import spring.BudgetConfig;
 

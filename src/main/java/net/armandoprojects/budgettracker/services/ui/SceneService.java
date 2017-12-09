@@ -1,4 +1,4 @@
-package net.armandoprojects.budgettracker.services;
+package net.armandoprojects.budgettracker.services.ui;
 
 import java.io.InputStream;
 import java.net.URL;

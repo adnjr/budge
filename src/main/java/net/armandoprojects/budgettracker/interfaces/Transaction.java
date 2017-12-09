@@ -1,5 +1,8 @@
 package net.armandoprojects.budgettracker.interfaces;
 
+import java.time.LocalDate;
+import net.armandoprojects.budgettracker.models.TransactionType;
+
 /** @author The Man */
 public interface Transaction {
 
@@ -14,5 +17,13 @@ public interface Transaction {
 	public Long getTotal();
 
 	public void setTotal(Long total);
+
+	public TransactionType getType();
+
+	public void setType(TransactionType type);
+
+	public LocalDate getTimestamp();
+
+	public void setTimestamp(LocalDate timestamp);
 
 }

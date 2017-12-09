@@ -7,16 +7,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import net.armandoprojects.budgettracker.services.SceneService;
+import net.armandoprojects.budgettracker.models.Armando;
+import net.armandoprojects.budgettracker.models.Jerry;
+import net.armandoprojects.budgettracker.services.model.TransactionService;
+import net.armandoprojects.budgettracker.services.ui.SceneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /** @author The Man */
 @Service
+@Lazy
 public class AddExpenseController implements Initializable {
 
 	@Autowired
-	private SceneService scene;
+	private SceneService sceneService;
+
+	@Autowired
+	private TransactionService transactionService;
 
 	@FXML
 	private Button homeBtn;
@@ -40,17 +48,21 @@ public class AddExpenseController implements Initializable {
 
 	@FXML
 	private void goHome() {
-		this.scene.load(SceneService.Scenes.DASHBOARD, homeBtn);
+		sceneService.load(SceneService.Scenes.DASHBOARD, homeBtn);
 	}
 
 	@FXML
 	private void addExpense() {
-		this.goHome();
+		if (dateField.getValue() == null || totalField.getText().trim().isEmpty())
+			return;
+
+		transactionService.addExpense(dateField.getValue(), totalField.getText(), new Jerry(), new Armando());
 	}
 
 	@FXML
 	private void cancelExpense() {
-		this.goHome();
+		System.out.println("Expense cancelled.");
+		goHome();
 	}
 
 }

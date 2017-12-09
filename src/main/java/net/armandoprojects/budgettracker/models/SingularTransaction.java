@@ -1,35 +1,32 @@
 package net.armandoprojects.budgettracker.models;
 
+import java.time.LocalDate;
 import net.armandoprojects.budgettracker.interfaces.Person;
 import net.armandoprojects.budgettracker.interfaces.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /** @author The Man */
-@Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+//@Component
+//@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class SingularTransaction implements Transaction {
 
 	private TransactionType type;
+	private LocalDate timestamp;
 	private Person initiator;
 	private Person target;
 	private Long total;
 
-	@Autowired
 	public SingularTransaction(
 		TransactionType type,
-		@Qualifier("famous") Person initiator,
-		@Qualifier("nobody") Person target,
-		@Value("#{20L}") Long total
+		LocalDate timestamp,
+		/* @Qualifier("famous") */ Person initiator,
+		/* @Qualifier("nobody") */ Person target,
+		/* @Value("#{20L}") */ String total
 	) {
 		this.type = type;
+		this.timestamp = timestamp;
 		this.initiator = initiator;
 		this.target = target;
-		this.total = total;
+		this.total = Long.parseLong(total);
 	}
 
 	@Override
@@ -63,16 +60,28 @@ public class SingularTransaction implements Transaction {
 	}
 
 	@Override
-	public String toString() {
-		return "SingularTransaction{" + "initiator=" + initiator.toString() + ", target=" + target.toString() + ", total=" + total.toString() + '}';
-	}
-
 	public TransactionType getType() {
 		return type;
 	}
 
+	@Override
 	public void setType(TransactionType type) {
 		this.type = type;
+	}
+
+	@Override
+	public LocalDate getTimestamp() {
+		return timestamp;
+	}
+
+	@Override
+	public void setTimestamp(LocalDate timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	@Override
+	public String toString() {
+		return "SingularTransaction{" + "type=" + type + ", timestamp=" + timestamp + ", initiator=" + initiator + ", target=" + target + ", total=" + total + '}';
 	}
 
 }

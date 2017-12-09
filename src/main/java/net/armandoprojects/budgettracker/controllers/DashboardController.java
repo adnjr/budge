@@ -9,7 +9,7 @@ import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import net.armandoprojects.budgettracker.services.SceneService;
+import net.armandoprojects.budgettracker.services.ui.SceneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,22 +1,8 @@
 package net.armandoprojects.spring.javafx.maven;
 
-import net.armandoprojects.budgettracker.interfaces.Transaction;
-import net.armandoprojects.budgettracker.interfaces.Person;
-import org.junit.After;
-import org.junit.AfterClass;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import spring.BudgetConfig;
-
 /** @author The Man */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = BudgetConfig.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = BudgetConfig.class)
 public class SpringTest {
 
 //	@Autowired
@@ -26,7 +12,7 @@ public class SpringTest {
 //	@Autowired
 //	@Qualifier("nobody")
 //	private Person target;
-	@Autowired
+	/*@Autowired
 	private Transaction income;
 
 	public SpringTest() {
@@ -76,5 +62,5 @@ public class SpringTest {
 	@Test
 	public void verifyTotal() {
 		assertEquals(new Long(20L), income.getTotal());
-	}
+	}*/
 }
